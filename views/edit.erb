@@ -1,0 +1,36 @@
+<div class="container">
+<h1>編集</h1>
+<div class="row">
+<form class="col s12" action="/edit/<%= @post_id%>" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="input-field col s6">
+          <input id="input_text" type="text" data-length="10" name="title" value="<%= @res['title']%>" required>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea2" class="materialize-textarea" data-length="120" name="contents"><%= @res['contents']%></textarea> 
+        </div>
+    </div>
+
+    <div class="file-field input-field">
+       <div class="btn">
+        <span>File</span>
+        <input type="file" name="image" required>
+        </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" name="image_title" value="<%= @res['image']%>">
+      </div>
+    </div>
+
+    <div class="submit">
+      <button class="btn waves-effect waves-light #4caf50 green" type="submit">Submit
+      <i class="material-icons right">send</i>
+       </button>
+    </div>
+
+    </form>
+ </div>
+</div>

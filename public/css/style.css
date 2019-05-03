@@ -1,0 +1,54 @@
+.container {
+    margin: auto;
+    padding: 100px;
+}
+.articles {
+    margin: auto;
+    padding: 100px;
+    text-align: center;
+}
+.image {
+    width: 50%;
+    height: 50%;
+}
+.submit {
+    text-align: center;
+    margin-top: 50px;
+}
+.form_wrapper {
+    margin: 50px 0;
+}
+
+.top { 
+    margin: auto;
+    padding: 100px;
+    text-align: center;
+}
+.post_btn {
+    position: fixed;
+    top:80vh;
+    right: 5vw;
+}
+.post_wrapper {
+    margin: 10vh 10vw ;
+    padding: 20px 100px;
+    border: solid 1px black;
+}
+.plofile_wrapper {
+    padding: 20px 10vw;
+    text-align: center;
+}
+.plofile_image {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-top: 100px;
+}
+.app_description {
+    font-size: 20px;
+}
+.logout {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+}

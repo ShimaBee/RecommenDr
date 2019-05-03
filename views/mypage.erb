@@ -1,0 +1,19 @@
+<div class="plofile_wrapper">
+<img class="plofile_image" src="/images/photo8_thum.jpg" alt="">
+<h1><%= @user_name['name']%>さん</h1>
+</div>
+
+<% @res.each do |post|%>
+<div class="post_wrapper">
+<p>title: <%= post['title']%></p>
+<p>contents: <%= post['contents']%></p>
+<img src="./images/<%= post['image']%>" alt="">
+<a class="waves-effect waves-light btn" href="/delete/<%= post['id']%>">削除</a>
+<a class="waves-effect waves-light btn" href="/edit/<%= post['id']%>">編集</a>
+</div>
+<% end%>
+
+<a href="/post" class="btn-floating btn-large waves-effect waves-light red post_btn">
+ <i class="material-icons">add</i>
+ </a>
+ <a class="btn #4caf50 green logout" href="/logout">logout</a>

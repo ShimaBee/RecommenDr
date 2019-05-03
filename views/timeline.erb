@@ -1,0 +1,11 @@
+<% @res.each do |post|%>
+<div class="post_wrapper">
+<p>title: <%= post['title']%></p>
+<p>contents: <%= post['contents']%></p>
+<img src="./images/<%= post['image']%>" alt="">
+</div>
+<% end%>
+
+ <a href="/post" class="btn-floating btn-large waves-effect waves-light red post_btn">
+ <i class="material-icons">add</i>
+ </a>
