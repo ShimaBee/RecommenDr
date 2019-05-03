@@ -17,6 +17,10 @@ def check_login
     redirect '/login' unless session[:user_id]
 end
 
+def check_admin_login
+    redirect '/admin_login' unless session[:name]
+end
+
 get '/' do
   erb :index
 end
@@ -106,4 +110,37 @@ post '/edit/:id' do
   FileUtils.mv(params['image']['tempfile'], "./public/images/#{params['image']['filename']}")
   connection.exec('update reviews set title = $1, contents = $2, image = $3 where id = $4', [title, contents,params['image']['filename'], id])
   redirect '/mypage'
+end
+
+
+get '/admin_login' do
+  erb :admin_login, :layout => nil
+end
+
+post '/admin_login' do
+  name = params['name']
+  password = params['password']
+  email = params['email']
+  name = connection.exec("select name from admin where name = $1 and password = $2 and email = $3",[name, password, email]).first
+  if name
+    session[:name] = name['name']
+    redirect '/create_class'
+  else
+    redirect '/admin_login'
+  end
+end
+
+get '/create_class' do
+  check_admin_login
+  erb :create_class, :layout => nil
+end
+
+get '/create_doctor' do
+  check_admin_login
+  erb :create_doctor, :layout => nil
+end
+
+get '/admin_logout' do
+    session[:name] = nil
+    redirect '/admin_login'
 end
