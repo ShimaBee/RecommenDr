@@ -10,7 +10,7 @@ enable :sessions
 connection = PG::connect(
   :host => "localhost", 
   :user => "shimabukuroyuuta", 
-  :dbname => "shimaboard", 
+  :dbname => "recommendr", 
   :port => 5432)
 
 def check_login
@@ -59,7 +59,7 @@ post '/register' do
 end
 
 get '/timeline' do
-  @res = connection.exec('select * from posts order by id desc')
+  @res = connection.exec('select * from reviews order by id desc')
   erb :timeline
 end
 
@@ -72,8 +72,9 @@ post '/post' do
   user_id = session[:user_id]
   title = params['title']
   contents = params['contents']
-  FileUtils.mv(params['image']['tempfile'], "./public/images/#{params['image']['filename']}")
-  connection.exec('insert into posts(title, contents, user_id, image) values($1, $2, $3, $4)', [title, contents ,user_id, params['image']['filename']])
+  connection.exec('insert into reviews(title, contents, user_id) values($1, $2, $3)', [title, contents ,user_id])
+  # FileUtils.mv(params['image']['tempfile'], "./public/images/#{params['image']['filename']}")
+  # connection.exec('insert into reviews(title, contents, user_id, image) values($1, $2, $3, $4)', [title, contents ,user_id, params['image']['filename']])
   redirect '/timeline'
 end
 
@@ -81,19 +82,19 @@ get '/mypage' do
   check_login
   user_id = session[:user_id]
   @user_name = connection.exec('select name from users where id = $1',[user_id]).first
-  @res = connection.exec('select * from posts where user_id = $1 order by id desc',[user_id])
+  @res = connection.exec('select * from reviews where user_id = $1 order by id desc',[user_id])
   erb :mypage
 end
 
 get '/delete/:id' do
   check_login
-  connection.exec('delete from posts where id = $1',[params['id']])
+  connection.exec('delete from reviews where id = $1',[params['id']])
   redirect '/mypage'
 end
 
 get '/edit/:id' do
   check_login
-  @res = connection.exec('select * from posts where id = $1',[params['id']]).first
+  @res = connection.exec('select * from reviews where id = $1',[params['id']]).first
   @post_id = @res['id']
   erb :edit
 end
@@ -103,6 +104,6 @@ post '/edit/:id' do
   contents = params['contents']
   id = params['id']
   FileUtils.mv(params['image']['tempfile'], "./public/images/#{params['image']['filename']}")
-  connection.exec('update posts set title = $1, contents = $2, image = $3 where id = $4', [title, contents,params['image']['filename'], id])
+  connection.exec('update reviews set title = $1, contents = $2, image = $3 where id = $4', [title, contents,params['image']['filename'], id])
   redirect '/mypage'
 end
