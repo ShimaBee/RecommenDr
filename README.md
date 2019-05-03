@@ -28,7 +28,7 @@ create table reviews (id serial primary key, title varchar(20) not null, content
 
 create doctors table <br>
 ```
-create table doctors (id serial primary key, name varchar(20), introduction text, belonging varchar(30), image text default 'default_user_image.jpg', class_id integer);
+create table doctors (id serial primary key, name varchar(20), introduction text, belonging varchar(30), image text default 'default_doctor_image.jpg', class_id integer);
 ```
 
 create classes table <br>
