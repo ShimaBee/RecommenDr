@@ -135,10 +135,22 @@ get '/create_class' do
   erb :create_class, :layout => nil
 end
 
+post '/create_class' do
+  class_name = params['name']
+  class_introduction = params['introduction']
+end
+
+
 get '/create_doctor' do
   check_admin_login
   erb :create_doctor, :layout => nil
 end
+
+post '/create_doctor' do
+  doctor_name = params['name']
+  doctor_introduction = params['introduction']
+end
+
 
 get '/admin_logout' do
     session[:name] = nil
