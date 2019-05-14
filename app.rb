@@ -138,6 +138,8 @@ end
 post '/create_class' do
   class_name = params['name']
   class_introduction = params['introduction']
+  connection.exec('insert into classes(name, introduction) values($1, $2)', [class_name, class_introduction])
+  redirect '/create_class'
 end
 
 
@@ -149,6 +151,8 @@ end
 post '/create_doctor' do
   doctor_name = params['name']
   doctor_introduction = params['introduction']
+  connection.exec('insert into doctors(name, introduction) values($1, $2)', [doctor_name, doctor_introduction])
+  redirect '/create_doctor'
 end
 
 
