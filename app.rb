@@ -151,7 +151,8 @@ end
 post '/create_doctor' do
   doctor_name = params['name']
   doctor_introduction = params['introduction']
-  connection.exec('insert into doctors(name, introduction) values($1, $2)', [doctor_name, doctor_introduction])
+  FileUtils.mv(params['image']['tempfile'], "./public/images/#{params['image']['filename']}")
+  connection.exec('insert into doctors(name, introduction, image) values($1, $2, $3)', [doctor_name, doctor_introduction, params['image']['filename']])
   redirect '/create_doctor'
 end
 
