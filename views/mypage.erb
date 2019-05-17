@@ -1,7 +1,8 @@
 <div class="plofile_wrapper row">
-<img class="plofile_image" src="/images/photo8_thum.jpg" alt="">
+<h1 class="col s12"><%= @user_name['name']%>さん</h1>
+<img class="plofile_image" src="/images/kani.jpg" alt="">
 <form action="/myimage" method="post">
-
+<div class="col s3"></div>
 <div class="file-field input-field col s6">
       <div class="btn">
         <span>編集</span>
@@ -11,8 +12,8 @@
         <input class="file-path validate" type="text">
       </div>
 </div>
+<div class="col s3"></div>
 </form>
-<h1 class="col s12"><%= @user_name['name']%>さん</h1>
 </div>
 
 <% @res.each do |post|%>

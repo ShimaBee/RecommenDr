@@ -90,6 +90,13 @@ get '/mypage' do
   erb :mypage
 end
 
+post '/mtimage' do
+  # mypadeにデフォルトで画像を入れる作業中
+  FileUtils.mv(params['myimage']['tempfile'], "./public/images/#{params['myimage']['filename']}")
+  connection.exec('insert into users(image) values($1)', [params['myimage']['filename']])
+end
+
+
 get '/delete/:id' do
   check_login
   connection.exec('delete from reviews where id = $1',[params['id']])
